@@ -25,25 +25,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     DOM.todoList = document.getElementById('todo-list');
     DOM.addBtn = document.getElementById('add-btn');
+    DOM.undoBtn = document.getElementById('undo-btn');
     DOM.todoInput = document.getElementById('todo-input')
 
     DOM.addBtn.addEventListener('click', () => {
         const cmd = new Command(Commands.ADD)
-
         CommandExecutor.execute(cmd);
-        DOM.todoInput.value = '';
-
     });
+
     DOM.todoList.addEventListener('click', (event) => {
         const toDelete = event.target.parentNode.dataset.text
         if (event.target.classList.contains('delete-btn')) {
             const cmd = new Command(Commands.DELETE, [toDelete]);
-
             CommandExecutor.execute(cmd);
         }
     })
-
+    DOM.undoBtn.addEventListener('click', () => {
+        let cmd = new Command(Commands.UNDO);
+        CommandExecutor.execute(cmd);
+    })
     TodoList.getInstance().addObserver(renderList);
+
 })
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -52,18 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.key === 'p') {
-        e.preventDefault();
-        const cmd = new Command(Commands.ADD);
-        CommandExecutor.execute(cmd);
-    }
     if (e.key == 'Enter') {
         e.preventDefault();
         const cmd = new Command(Commands.ADD);
         CommandExecutor.execute(cmd);
     }
     if (e.ctrlKey && e.key === 'z') {
-        console.log("")
+        event.preventDefault();
         const cmd = new Command(Commands.UNDO);
         CommandExecutor.execute(cmd);
     }

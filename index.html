@@ -11,8 +11,15 @@
 <body>
     <div class="container">
         <h1>ToDo Masters</h1>
-        <input type="text" id="todo-input" placeholder="Add a new task" />
-        <button id="add-btn">Add </button>
+        <h3>Using Design Patterns : </h3>
+        <h3>[Mixin , Singleton, Observer , Command , Memento] </h3>
+        <input type="text" id="todo-input" aria-label="Add a new task" placeholder="Add a new task" />
+
+        <div class="button-container">
+
+            <button id="add-btn" class="btn">Add </button>
+            <button id="undo-btn" class="btn">Undo <h6>(Ctrl + Z)</h6> </button>
+        </div>
         <ul id="todo-list" class="todo-list"></ul>
     </div>
 </body>

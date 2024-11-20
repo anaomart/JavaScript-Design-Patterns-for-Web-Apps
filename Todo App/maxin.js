@@ -1,5 +1,6 @@
 export const observerMixin = {
     observes: new Set(),
+
     addObserver(obs) {
         this.observes.add(obs);
     },
@@ -7,6 +8,9 @@ export const observerMixin = {
         this.observes.delete(obs);
     },
     notify() {
-        this.observes.forEach(obs => obs())
+        this.observes.forEach(obs => {
+            obs()
+        })
+
     }
 }

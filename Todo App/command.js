@@ -26,7 +26,10 @@ export const CommandExecutor = {
                 const itemToAdd = todoList.find(todoText);
                 if (todoText !== '' && itemToAdd == null) {
                     todoList.add(new TodoItem(todoText));
+                    DOM.todoInput.value = '';
+
                 }
+
                 console.log("Add command");
                 break;
             case Commands.DELETE:
@@ -35,8 +38,14 @@ export const CommandExecutor = {
                 console.log("Delete command");
                 break;
             case Commands.UNDO:
+                const before = TodoHistory
+                console.log({ before })
                 const previousList = TodoHistory.pop();
+                TodoHistory.pop();
+                console.log({ previousList })
+                console.log('undo command');
                 if (previousList) {
+                    console.log('undo command 2');
                     todoList.replaceList(previousList);
                 }
         }
